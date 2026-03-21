@@ -1,0 +1,70 @@
+name: Update Website Release
+
+on:
+  repository_dispatch:
+    types: [new-release]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set version
+        id: version
+        run: echo "version=${{ github.event.client_payload.version }}" >> "$GITHUB_OUTPUT"
+
+      - name: Download JAR from private repo release
+        run: |
+          gh release download "v${{ steps.version.outputs.version }}" \
+            --repo quellery/quellery \
+            --pattern "*.jar" \
+            --dir .
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_PAT }}
+
+      - name: Rename JAR for release
+        run: |
+          mv quellery-${{ steps.version.outputs.version }}.jar quellery.jar
+
+      - name: Update version in website files
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          OLD_VERSION=$(cat VERSION)
+
+          for f in *.html; do
+            # Update displayed version spans: <span data-version>X.Y.Z</span>
+            sed -i -E "s|(<span[^>]*data-version[^>]*>)[^<]*(</span>)|\1${VERSION}\2|g" "$f"
+
+            # Update JAR filenames: quellery-X.Y.Z.jar
+            sed -i -E "s/quellery-[0-9]+\.[0-9]+\.[0-9]+\.jar/quellery-${VERSION}.jar/g" "$f"
+
+            # Update download URLs: releases/download/vX.Y.Z/
+            sed -i -E "s|releases/download/v[0-9]+\.[0-9]+\.[0-9]+/|releases/download/v${VERSION}/|g" "$f"
+
+            # Update Docker image tags (specific versions, not :latest)
+            sed -i -E "s|lancewalton/quellery:[0-9]+\.[0-9]+\.[0-9]+|lancewalton/quellery:${VERSION}|g" "$f"
+          done
+
+          echo "$VERSION" > VERSION
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Release v${{ steps.version.outputs.version }}"
+          git push
+
+      - name: Create release with JAR
+        run: |
+          gh release create "v${{ steps.version.outputs.version }}" \
+            quellery.jar \
+            --title "Quellery v${{ steps.version.outputs.version }}" \
+            --notes "Download quellery.jar below to run Quellery locally with Java 21+."
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

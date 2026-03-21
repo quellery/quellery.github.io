@@ -119,6 +119,22 @@ nav a.active {
   background: var(--colour-primary-dark);
 }
 
+.version-info {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+.version-info a {
+  color: var(--colour-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.version-info a:hover {
+  text-decoration: underline;
+}
+
 /* — Sections — */
 
 .section {

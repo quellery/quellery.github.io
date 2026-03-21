@@ -59,7 +59,7 @@ volumes:
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="download">
   <h2>Alternative: Run without Docker</h2>
   <p>If you prefer not to use Docker, you can download the fat JAR and run Quellery directly with Java.</p>
 
@@ -72,7 +72,8 @@ volumes:
 
     <div class="step">
       <h3>Download</h3>
-      <p>Download <code>quellery-&lt;version&gt;.jar</code> from the <a href="https://github.com/lancewalton/quellery/releases/latest">latest GitHub release</a>.</p>
+      <p>Download the latest release:</p>
+      <a href="https://github.com/quellery/quellery.github.io/releases/latest/download/quellery.jar" class="download-btn">Download quellery.jar <span data-version>0.0.0</span></a>
     </div>
 
     <div class="step">
@@ -80,7 +81,7 @@ volumes:
       <pre><code>REPOSITORY_DIR=./data \
 ENCRYPTION_KEY=change-me-to-a-secure-key \
 SESSION_SECRET=change-me-to-a-session-secret \
-java -jar quellery-*.jar</code></pre>
+java -jar quellery.jar</code></pre>
       <p>Then open <a href="http://localhost:8080">http://localhost:8080</a> in your browser.</p>
       <p class="body-text"><code>REPOSITORY_DIR</code> is the directory where Quellery stores its SQLite database, event snapshots, and licence file. It will be created if it doesn't exist.</p>
     </div>
