@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Started — Quellery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="Quellery.png" alt="Quellery"></a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="get-started.html" class="active">Get Started</a></li>
+      <li><a href="licensing.html">Licensing</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="section">
+  <h2>Get started with Quellery</h2>
+  <p>All you need is Docker. Quellery runs as a single container with built-in persistence.</p>
+
+  <div class="steps">
+
+    <div class="step">
+      <h3>Download the compose file</h3>
+      <p>Save this <code>docker-compose.yml</code> to an empty directory, or download it directly.</p>
+      <pre><code>services:
+  quellery:
+    image: lancewalton/quellery:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - quellery-data:/data
+    environment:
+      - ENCRYPTION_KEY=change-me-to-a-secure-key
+      - SESSION_SECRET=change-me-to-a-session-secret
+
+volumes:
+  quellery-data:</code></pre>
+      <p class="body-text">Replace <code>ENCRYPTION_KEY</code> and <code>SESSION_SECRET</code> with your own random strings. These encrypt stored database credentials and sign session tokens respectively.</p>
+      <a href="docker-compose.yml" download class="download-btn">Download docker-compose.yml</a>
+    </div>
+
+    <div class="step">
+      <h3>Start Quellery</h3>
+      <pre><code>docker compose up -d</code></pre>
+      <p>Then open <a href="http://localhost:8080">http://localhost:8080</a> in your browser.</p>
+    </div>
+
+    <div class="step">
+      <h3>Create your account</h3>
+      <p>On first launch you'll be prompted to create an admin account. Once logged in, create a database connection, select a schema, and you'll see all of your tables.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <h2>Alternative: Run without Docker</h2>
+  <p>If you prefer not to use Docker, you can download the fat JAR and run Quellery directly with Java.</p>
+
+  <div class="steps">
+
+    <div class="step">
+      <h3>Prerequisites</h3>
+      <p>Java 21 or later. Check with <code>java -version</code>.</p>
+    </div>
+
+    <div class="step">
+      <h3>Download</h3>
+      <p>Download <code>quellery-&lt;version&gt;.jar</code> from the <a href="https://github.com/lancewalton/quellery/releases/latest">latest GitHub release</a>.</p>
+    </div>
+
+    <div class="step">
+      <h3>Run</h3>
+      <pre><code>REPOSITORY_DIR=./data \
+ENCRYPTION_KEY=change-me-to-a-secure-key \
+SESSION_SECRET=change-me-to-a-session-secret \
+java -jar quellery-*.jar</code></pre>
+      <p>Then open <a href="http://localhost:8080">http://localhost:8080</a> in your browser.</p>
+      <p class="body-text"><code>REPOSITORY_DIR</code> is the directory where Quellery stores its SQLite database, event snapshots, and licence file. It will be created if it doesn't exist.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <h2>Connecting to databases</h2>
+  <p>When you create a database connection, Quellery asks for the database type, hostname, port, database name, and credentials. It supports PostgreSQL, MySQL, and H2.</p>
+
+  <h3>Database on the same machine</h3>
+  <p>If your database runs on the same machine as Docker, use <code>host.docker.internal</code> as the hostname. This is Docker's special name for reaching the host machine from inside a container.</p>
+
+  <h3>Database on a remote machine</h3>
+  <p>Use the IP address or hostname of the remote machine directly.</p>
+
+  <h3>Database in another container</h3>
+  <p>Put the database container on the same Docker network as Quellery, then use the container name as the hostname.</p>
+</section>
+
+<section class="section">
+  <h2>Configuration</h2>
+  <table>
+    <thead>
+      <tr><th>Variable</th><th>Required</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>ENCRYPTION_KEY</code></td><td>Yes</td><td>&mdash;</td><td>Encrypts stored database credentials</td></tr>
+      <tr><td><code>SESSION_SECRET</code></td><td>Yes</td><td>&mdash;</td><td>Signs session tokens</td></tr>
+      <tr><td><code>SESSION_EXPIRY_HOURS</code></td><td>No</td><td>24</td><td>Login session duration (hours)</td></tr>
+      <tr><td><code>LICENCE_FILE</code></td><td>No</td><td><code>/data/licence.json</code></td><td>Path to licence file inside the container</td></tr>
+      <tr><td><code>PROMOTE_ADMIN_EMAIL</code></td><td>No</td><td>&mdash;</td><td>Promote an existing user to admin on startup</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Data storage</h3>
+  <p>All Quellery data — the SQLite database, event snapshots, and licence file — is stored in <code>/data</code> inside the container. The compose file mounts this as a named volume so your data persists across restarts.</p>
+
+  <h3>Emergency admin recovery</h3>
+  <p>If all admin accounts are locked out, set <code>PROMOTE_ADMIN_EMAIL</code> to an existing user's email. On the next startup that user will be promoted to administrator. Remove the variable afterwards.</p>
+</section>
+
+<section class="section">
+  <h2>Updating</h2>
+  <p>Pull the latest image and restart:</p>
+  <pre><code>docker compose pull
+docker compose up -d</code></pre>
+  <p>Your data is preserved in the <code>quellery-data</code> volume.</p>
+</section>
+
+<footer>
+  Quellery
+</footer>
+
+</body>
+</html>

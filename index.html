@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quellery — Taming the Uncertain Schema</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="Quellery.png" alt="Quellery"></a>
+    <ul>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="get-started.html">Get Started</a></li>
+      <li><a href="licensing.html">Licensing</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Taming the <span>Uncertain</span> Schema</h1>
+  <p>Quellery inspects your live database schema and lets you build a validated conceptual model on top of it —
+      documenting what's intended, catching what's missing.</p>
+  <a href="get-started.html" class="cta">Get Started</a>
+</section>
+
+<section class="section">
+  <h2>Discover what you actually have</h2>
+  <p class="body-text">Most databases accumulate years of decisions — some deliberate, some accidental. Nullable columns that should never be null. Foreign keys that exist by convention but were never declared. Columns that follow patterns no one wrote down.</p>
+  <p class="body-text">Quellery connects to your live database and reads the physical schema: every table, column, key, index, and constraint. But it doesn't stop at what's declared. It analyses your actual data to surface what's implicit — inferring naming conventions, suggesting missing relationships, discovering functional dependencies, and finding groups of columns that are always null together.</p>
+</section>
+
+<section class="section">
+  <h2>Build your conceptual model, iteratively</h2>
+  <p class="body-text">You don't need to model everything at once. Start with one table — mark which columns should be required, document a missing foreign key, note that a column contains email addresses. Quellery validates your declarations against the live schema and flags mismatches immediately.</p>
+  <p class="body-text">As your understanding deepens, layer on more: define functional dependencies that reveal normalisation issues, identify null cohorts that suggest table extraction, create model types that constrain column values. Each addition is validated continuously, so you always know where the physical schema diverges from your intent.</p>
+  <p class="body-text">When the model is ready, Quellery generates the SQL migration scripts to bring your physical schema in line — NOT NULL constraints, foreign keys, check constraints, index creation, and table extraction for null cohorts.</p>
+  <p class="body-text">Because models and databases are independent, you can point the same model at different database connections — dev, QA, production — and validate each environment against the same set of expectations. Build the model against development, then switch to production to see where reality diverges.</p>
+</section>
+
+<section class="section">
+  <h2>What you can model</h2>
+
+  <div class="features">
+    <div class="feature-card">
+      <h3>Nullability constraints</h3>
+      <p>Mark columns as intentionally nullable or required, then validate that the schema matches your intent.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Keys &amp; relationships</h3>
+      <p>Document primary keys, unique indexes, and foreign key relationships. Discover missing ones automatically.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Functional dependencies</h3>
+      <p>Define and infer functional dependencies to uncover hidden normalisation issues in your data.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Null cohorts</h3>
+      <p>Find groups of columns that are always NULL together — candidates for extraction into separate tables.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Model types</h3>
+      <p>Define regex patterns, enumerations, and tuple patterns, then assign them to columns for constraint validation.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Naming conventions</h3>
+      <p>Infer and enforce naming conventions for primary keys, indexes, foreign keys, and check constraints.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Migration scripts</h3>
+      <p>Generate SQL migration scripts to bring your physical schema in line with your conceptual model.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Continuous validation</h3>
+      <p>Quellery validates your model against the live database on a configurable interval, flagging violations in real time.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Supported databases</h2>
+  <p>Connect to the databases your team already uses.</p>
+  <div class="db-list">
+    <div class="db-item"><div class="db-dot"></div> PostgreSQL</div>
+    <div class="db-item"><div class="db-dot"></div> MySQL</div>
+    <div class="db-item"><div class="db-dot"></div> H2</div>
+  </div>
+
+  <h3>Coming soon</h3>
+  <div class="db-list">
+    <div class="db-item"><div class="db-dot coming-soon"></div> Oracle</div>
+    <div class="db-item"><div class="db-dot coming-soon"></div> SQL Server</div>
+    <div class="db-item"><div class="db-dot coming-soon"></div> MariaDB</div>
+    <div class="db-item"><div class="db-dot coming-soon"></div> SQLite</div>
+    <div class="db-item"><div class="db-dot coming-soon"></div> CockroachDB</div>
+    <div class="db-item"><div class="db-dot coming-soon"></div> Snowflake</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Run it in seconds</h2>
+  <p>Quellery ships as a single Docker image. One <code>docker compose up</code> and you're inspecting schemas.</p>
+  <a href="get-started.html" class="cta">See setup instructions</a>
+</section>
+
+<footer>
+  Quellery
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Licensing — Quellery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="Quellery.png" alt="Quellery"></a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="get-started.html">Get Started</a></li>
+      <li><a href="licensing.html" class="active">Licensing</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="section">
+  <h2>Try Quellery for free</h2>
+  <p>Quellery works out of the box with no licence file. Every feature is available — just with quantity limits so you can evaluate the full experience before committing.</p>
+
+  <h3>Trial limits</h3>
+  <table>
+    <thead>
+      <tr><th>Resource</th><th>Trial Limit</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Databases</td><td>2</td></tr>
+      <tr><td>Models</td><td>2</td></tr>
+      <tr><td>Users</td><td>3</td></tr>
+      <tr><td>Keys</td><td>20 per model</td></tr>
+      <tr><td>Table Relationships</td><td>10 per model</td></tr>
+      <tr><td>Functional Dependencies</td><td>10 per model</td></tr>
+      <tr><td>Null Cohorts</td><td>5 per model</td></tr>
+      <tr><td>Model Types</td><td>10 per model</td></tr>
+      <tr><td>Pattern Matches</td><td>10 per model</td></tr>
+      <tr><td>Nullability Overrides</td><td>50 per model</td></tr>
+      <tr><td>Column Model Types</td><td>20 per model</td></tr>
+      <tr><td>Notes</td><td>20 per model</td></tr>
+      <tr><td>Stored Queries</td><td>10 per model</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="section">
+  <h2>Licensed editions</h2>
+  <p>All licensed editions remove every resource limit. They differ only in user count.</p>
+
+  <div class="editions">
+    <div class="edition-card">
+      <h3>Personal</h3>
+      <div class="user-count">1</div>
+      <div class="user-label">user</div>
+      <div class="feature-note">All features, no limits</div>
+    </div>
+    <div class="edition-card highlight">
+      <h3>Team</h3>
+      <div class="user-count">10</div>
+      <div class="user-label">users</div>
+      <div class="feature-note">All features, no limits</div>
+    </div>
+    <div class="edition-card">
+      <h3>Enterprise</h3>
+      <div class="user-count">&infin;</div>
+      <div class="user-label">users</div>
+      <div class="feature-note">All features, no limits</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Installing a licence</h2>
+  <p>Copy your <code>licence.json</code> file into the running container's data volume:</p>
+  <pre><code>docker compose cp licence.json quellery:/data/licence.json</code></pre>
+  <p>Quellery checks for the licence file every 60 seconds, so it will be picked up automatically — no restart needed.</p>
+</section>
+
+<footer>
+  Quellery
+</footer>
+
+</body>
+</html>

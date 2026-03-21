@@ -1,0 +1,13 @@
+services:
+  quellery:
+    image: lancewalton/quellery:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - quellery-data:/data
+    environment:
+      - ENCRYPTION_KEY=change-me-to-a-secure-key
+      - SESSION_SECRET=change-me-to-a-session-secret
+
+volumes:
+  quellery-data:
