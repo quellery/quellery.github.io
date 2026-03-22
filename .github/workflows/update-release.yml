@@ -65,7 +65,7 @@ jobs:
       - name: Commit and push
         run: |
           git add -A
-          git commit -m "Release v${{ steps.version.outputs.version }}"
+          git diff --staged --quiet && echo "No changes to commit" || git commit -m "Release v${{ steps.version.outputs.version }}"
           git push
 
       - name: Create release with JAR
