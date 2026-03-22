@@ -83,7 +83,7 @@ ENCRYPTION_KEY=change-me-to-a-secure-key \
 SESSION_SECRET=change-me-to-a-session-secret \
 java -jar quellery.jar</code></pre>
       <p>Then open <a href="http://localhost:8080">http://localhost:8080</a> in your browser.</p>
-      <p class="body-text"><code>REPOSITORY_DIR</code> is the directory where Quellery stores its SQLite database, event snapshots, and licence file. It will be created if it doesn't exist.</p>
+      <p class="body-text"><code>REPOSITORY_DIR</code> is the directory where Quellery stores its SQLite database and event snapshots. It will be created if it doesn't exist.</p>
     </div>
 
   </div>
@@ -113,13 +113,12 @@ java -jar quellery.jar</code></pre>
       <tr><td><code>ENCRYPTION_KEY</code></td><td>Yes</td><td>&mdash;</td><td>Encrypts stored database credentials</td></tr>
       <tr><td><code>SESSION_SECRET</code></td><td>Yes</td><td>&mdash;</td><td>Signs session tokens</td></tr>
       <tr><td><code>SESSION_EXPIRY_HOURS</code></td><td>No</td><td>24</td><td>Login session duration (hours)</td></tr>
-      <tr><td><code>LICENCE_FILE</code></td><td>No</td><td><code>/data/licence.json</code></td><td>Path to licence file inside the container</td></tr>
       <tr><td><code>PROMOTE_ADMIN_EMAIL</code></td><td>No</td><td>&mdash;</td><td>Promote an existing user to admin on startup</td></tr>
     </tbody>
   </table>
 
   <h3>Data storage</h3>
-  <p>All Quellery data — the SQLite database, event snapshots, and licence file — is stored in <code>/data</code> inside the container. The compose file mounts this as a named volume so your data persists across restarts.</p>
+  <p>All Quellery data — the SQLite database and event snapshots — is stored in <code>/data</code> inside the container. The compose file mounts this as a named volume so your data persists across restarts.</p>
 
   <h3>Emergency admin recovery</h3>
   <p>If all admin accounts are locked out, set <code>PROMOTE_ADMIN_EMAIL</code> to an existing user's email. On the next startup that user will be promoted to administrator. Remove the variable afterwards.</p>
