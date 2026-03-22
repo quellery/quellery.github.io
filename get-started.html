@@ -21,7 +21,7 @@
 
 <section class="section">
   <h2>Get started with Quellery</h2>
-  <p>All you need is Docker. Quellery runs as a single container with built-in persistence.</p>
+  <p>All you need is Docker. Quellery runs as a single container using either SQLite (zero-config, file-based) or PostgreSQL (shared-server deployments) for its own persistence. The example below uses SQLite — see <a href="#configuration">Configuration</a> to switch to PostgreSQL.</p>
 
   <div class="steps">
 
@@ -62,7 +62,7 @@ volumes:
 
 <section class="section" id="download">
   <h2>Alternative: Run without Docker</h2>
-  <p>If you prefer not to use Docker, you can download the fat JAR and run Quellery directly with Java.</p>
+  <p>If you prefer not to use Docker, you can download the fat JAR and run Quellery directly with Java. Like Docker, you can use either SQLite or PostgreSQL — the example below uses SQLite.</p>
 
   <div class="steps">
 
@@ -104,7 +104,7 @@ java -jar quellery.jar</code></pre>
   <p>Put the database container on the same Docker network as Quellery, then use the container name as the hostname.</p>
 </section>
 
-<section class="section">
+<section class="section" id="configuration">
   <h2>Configuration</h2>
   <table>
     <thead>
