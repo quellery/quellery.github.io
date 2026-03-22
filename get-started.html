@@ -36,6 +36,7 @@
     volumes:
       - quellery-data:/data
     environment:
+      - DATABASE_URL=jdbc:sqlite:/data/quellery.sqlite
       - ENCRYPTION_KEY=change-me-to-a-secure-key
       - SESSION_SECRET=change-me-to-a-session-secret
 
@@ -78,12 +79,12 @@ volumes:
 
     <div class="step">
       <h3>Run</h3>
-      <pre><code>REPOSITORY_DIR=./data \
+      <pre><code>DATABASE_URL=jdbc:sqlite:./data/quellery.sqlite \
 ENCRYPTION_KEY=change-me-to-a-secure-key \
 SESSION_SECRET=change-me-to-a-session-secret \
 java -jar quellery.jar</code></pre>
       <p>Then open <a href="http://localhost:8080">http://localhost:8080</a> in your browser.</p>
-      <p class="body-text"><code>REPOSITORY_DIR</code> is the directory where Quellery stores its SQLite database and event snapshots. It will be created if it doesn't exist.</p>
+      <p class="body-text"><code>DATABASE_URL</code> is the JDBC URL for Quellery's own database. Use <code>jdbc:sqlite:&lt;path&gt;</code> for SQLite or <code>jdbc:postgresql://host:port/dbname</code> for PostgreSQL.</p>
     </div>
 
   </div>
@@ -110,6 +111,9 @@ java -jar quellery.jar</code></pre>
       <tr><th>Variable</th><th>Required</th><th>Default</th><th>Description</th></tr>
     </thead>
     <tbody>
+      <tr><td><code>DATABASE_URL</code></td><td>Yes</td><td>&mdash;</td><td>JDBC URL for Quellery's database (<code>jdbc:sqlite:...</code> or <code>jdbc:postgresql://...</code>)</td></tr>
+      <tr><td><code>DATABASE_USERNAME</code></td><td>No</td><td>&mdash;</td><td>Database username (PostgreSQL only)</td></tr>
+      <tr><td><code>DATABASE_PASSWORD</code></td><td>No</td><td>&mdash;</td><td>Database password (PostgreSQL only)</td></tr>
       <tr><td><code>ENCRYPTION_KEY</code></td><td>Yes</td><td>&mdash;</td><td>Encrypts stored database credentials</td></tr>
       <tr><td><code>SESSION_SECRET</code></td><td>Yes</td><td>&mdash;</td><td>Signs session tokens</td></tr>
       <tr><td><code>SESSION_EXPIRY_HOURS</code></td><td>No</td><td>24</td><td>Login session duration (hours)</td></tr>
@@ -118,7 +122,7 @@ java -jar quellery.jar</code></pre>
   </table>
 
   <h3>Data storage</h3>
-  <p>All Quellery data — the SQLite database and event snapshots — is stored in <code>/data</code> inside the container. The compose file mounts this as a named volume so your data persists across restarts.</p>
+  <p>By default Quellery uses SQLite, storing its database at the path specified in <code>DATABASE_URL</code>. The Docker compose file mounts <code>/data</code> as a named volume so your data persists across restarts. Alternatively, set <code>DATABASE_URL</code> to a PostgreSQL JDBC URL with <code>DATABASE_USERNAME</code> and <code>DATABASE_PASSWORD</code> for shared-server deployments.</p>
 
   <h3>Emergency admin recovery</h3>
   <p>If all admin accounts are locked out, set <code>PROMOTE_ADMIN_EMAIL</code> to an existing user's email. On the next startup that user will be promoted to administrator. Remove the variable afterwards.</p>

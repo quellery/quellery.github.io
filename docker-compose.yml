@@ -6,6 +6,7 @@ services:
     volumes:
       - quellery-data:/data
     environment:
+      - DATABASE_URL=jdbc:sqlite:/data/quellery.sqlite
       - ENCRYPTION_KEY=change-me-to-a-secure-key
       - SESSION_SECRET=change-me-to-a-session-secret
 
