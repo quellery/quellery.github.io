@@ -84,6 +84,10 @@ nav a.active {
   padding: 5rem 2rem 4rem;
 }
 
+.hero--with-screenshot {
+  padding-bottom: 8rem;
+}
+
 .hero h1 {
   font-size: 2.75rem;
   font-weight: 800;
@@ -133,6 +137,98 @@ nav a.active {
 
 .version-info a:hover {
   text-decoration: underline;
+}
+
+/* — Hero screenshot — */
+
+.hero-screenshot {
+  max-width: calc(var(--max-width) + 4rem);
+  margin: -5rem auto 0;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.hero-screenshot img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* — Showcase sections (text + image, alternating) — */
+
+.showcase {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.showcase--reverse {
+  flex-direction: row-reverse;
+}
+
+.showcase-text {
+  flex: 1;
+}
+
+.showcase-text h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.showcase-text p {
+  margin-bottom: 1rem;
+  color: var(--colour-text);
+}
+
+.showcase-image {
+  flex: 1;
+  text-align: center;
+}
+
+.showcase-image img {
+  max-width: 100%;
+  max-height: 420px;
+  width: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* — Screenshot gallery — */
+
+.screenshot-gallery {
+  margin-top: 2rem;
+}
+
+.screenshot-gallery figure {
+  margin: 2.5rem 0;
+  text-align: center;
+}
+
+.screenshot-gallery img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+}
+
+.screenshot-gallery .screenshot-sm {
+  max-width: 416px;
+}
+
+.screenshot-gallery .screenshot-md {
+  max-width: 658px;
+}
+
+.screenshot-gallery figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--colour-text-muted);
 }
 
 /* — Sections — */
@@ -391,8 +487,25 @@ footer {
     font-size: 1.05rem;
   }
 
+  .hero--with-screenshot {
+    padding-bottom: 6rem;
+  }
+
+  .hero-screenshot {
+    margin-top: -3rem;
+  }
+
   nav ul {
     gap: 1rem;
+  }
+
+  .showcase,
+  .showcase--reverse {
+    flex-direction: column;
+  }
+
+  .showcase-image img {
+    max-height: none;
   }
 
   .step {
