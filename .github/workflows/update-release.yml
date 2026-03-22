@@ -72,6 +72,7 @@ jobs:
         run: |
           gh release create "v${{ steps.version.outputs.version }}" \
             quellery.jar \
+            --clobber \
             --title "Quellery v${{ steps.version.outputs.version }}" \
             --notes "Download quellery.jar below to run Quellery locally with Java 21+."
         env:
