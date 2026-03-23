@@ -90,20 +90,6 @@ java -jar quellery.jar</code></pre>
   </div>
 </section>
 
-<section class="section">
-  <h2>Connecting to databases</h2>
-  <p>When you create a database connection, Quellery asks for the database type, hostname, port, database name, and credentials. It supports PostgreSQL, MySQL, and H2.</p>
-
-  <h3>Database on the same machine</h3>
-  <p>If your database runs on the same machine as Docker, use <code>host.docker.internal</code> as the hostname. This is Docker's special name for reaching the host machine from inside a container.</p>
-
-  <h3>Database on a remote machine</h3>
-  <p>Use the IP address or hostname of the remote machine directly.</p>
-
-  <h3>Database in another container</h3>
-  <p>Put the database container on the same Docker network as Quellery, then use the container name as the hostname.</p>
-</section>
-
 <section class="section" id="configuration">
   <h2>Configuration</h2>
   <table>
@@ -134,6 +120,20 @@ java -jar quellery.jar</code></pre>
   <pre><code>docker compose pull
 docker compose up -d</code></pre>
   <p>Your data is preserved in the <code>quellery-data</code> volume.</p>
+</section>
+
+<section class="section">
+  <h2>Connecting to databases</h2>
+  <p>When you create a database connection, Quellery asks for the database type, hostname, port, database name, and credentials. It supports PostgreSQL, MySQL, and H2.</p>
+
+  <h3>Database on the same machine</h3>
+  <p>If your database runs on the same machine as Docker, use <code>host.docker.internal</code> as the hostname. This is Docker's special name for reaching the host machine from inside a container.</p>
+
+  <h3>Database on a remote machine</h3>
+  <p>Use the IP address or hostname of the remote machine directly.</p>
+
+  <h3>Database in another container</h3>
+  <p>Put the database container on the same Docker network as Quellery, then use the container name as the hostname.</p>
 </section>
 
 <footer>
